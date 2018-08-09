@@ -1,0 +1,28 @@
+001 Boilerplate
+
+	$ vue init webpack-simple kanban
+
+	? Project name kanban
+	? Project description A Vue.js project
+	? Author Phil Johnstone <phil@lemonshark.ltd.uk>
+	? License MIT
+	? Use sass? No
+
+	   vue-cli · Generated "kanban".
+
+	   To get started:
+	   
+		 cd kanban
+		 npm install
+		 npm run dev
+
+	$ npm install
+	$ npm run dev
+
+002 Bootstrap css
+
+	Add following to index.html
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+003 
+

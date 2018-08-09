@@ -1,0 +1,38 @@
+<template>
+  <div class="card">
+    <!--
+    <div class="card-header">
+
+    </div>
+    -->
+    <div class="card-body">
+      {{ value.name }}
+      <i class="fa fa-trash" style="cursor: pointer; float: right" @click="remove" title="Remove Task"></i>
+      <i class="fa fa-archive" style="cursor: pointer; float: right; padding-right: 0.5rem" @click="archive" title="Archive Task"></i>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  props: ['value'],
+  methods: {
+    archive: function() {
+      console.log('Archive Clicked')
+    },
+    remove: function() {
+      console.log('Remove Clicked')
+    }
+  }
+}
+</script>
+
+<style>
+.card {
+  background-color: #F7F7F7;
+  margin-bottom: 1.25rem;
+}
+.card-header, .card-body {
+  padding: 0.5rem;
+}
+</style>
