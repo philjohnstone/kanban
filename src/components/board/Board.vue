@@ -7,7 +7,12 @@
         <span class="fa fa-plus" style="float: right; cursor: pointer;" @click="add" title="Add Column"></span>
       </p>
       <draggable :list="column.tasks" :options="{ group:'tasks' }" style="min-height: 100px">
-        <Task v-for="(task, index) in column.tasks" v-if="!task.isArchived" :key="task.name" :canArchive="isLastColumn(columnIndex)" v-model="column.tasks[index]"></Task>
+        <Task v-for="(task, taskIndex) in column.tasks"
+              v-if="!task.isArchived"
+              :key="task.name"
+              :canArchive="isLastColumn(columnIndex)"
+              v-model="column.tasks[taskIndex]"
+              @remove-task="removeTask(columnIndex, taskIndex)"></Task>
       </draggable>
     </div>
   </div>
@@ -33,6 +38,9 @@ export default {
     },
     isLastColumn: function(columnIndex) {
       return columnIndex === this.value.length - 1
+    },
+    removeTask: function(columnIndex, taskIndex) {
+      this.value[columnIndex].tasks.splice(taskIndex, 1)
     }
   }
 }

@@ -7,7 +7,7 @@
     -->
     <div class="card-body">
       {{ value.name }}
-      <i class="fa fa-trash" style="cursor: pointer; float: right" @click="remove" title="Remove Task"></i>
+      <i class="fa fa-trash" style="cursor: pointer; float: right" @click="$emit('remove-task')" title="Remove Task"></i>
       <i v-if="canArchive" class="fa fa-archive" style="cursor: pointer; float: right; padding-right: 0.5rem" @click="archive" title="Archive Task"></i>
     </div>
   </div>
@@ -22,9 +22,6 @@ export default {
   methods: {
     archive: function() {
       this.value.isArchived = true;
-    },
-    remove: function() {
-      console.log('Remove Clicked')
     }
   }
 }
