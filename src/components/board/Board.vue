@@ -1,15 +1,6 @@
 <template>
   <div class="row">
     <div class="col-sm" v-for="(column, columnIndex) in value" :column="column" :key="column.name">
-<<<<<<< HEAD
-      <draggable :list="column.tasks" :options="{ group:'tasks' }" class="column">
-        <p class="column-header">
-          <span class="fa fa-cog" style="float: left" @click="setup" title="Setup Column"></span>
-          {{ column.name }}
-          <span class="fa fa-plus" style="float: right" @click="add" title="Add Column"></span>
-        </p>
-        <Task v-for="(task, index) in column.tasks" :key="task.name" v-model="column.tasks[index]" :canArchive="isLastColumn(columnIndex)"></Task>
-=======
       <p class="column-title" style="text-align: center">
         <span class="fa fa-cog" style="float: left; cursor: pointer;" @click="setup" title="Setup Column"></span>
         {{ column.name }}
@@ -17,7 +8,6 @@
       </p>
       <draggable :list="column.tasks" :options="{ group:'tasks' }" style="min-height: 100px">
         <Task v-for="(task, index) in column.tasks" :key="task.name" :canArchive="isLastColumn(columnIndex)" v-model="column.tasks[index]"></Task>
->>>>>>> 7627d1d... fixed archive
       </draggable>
     </div>
   </div>
@@ -42,11 +32,7 @@ export default {
       console.log('Add clicked')
     },
     isLastColumn: function(columnIndex) {
-<<<<<<< HEAD
-      return columnIndex === this.value.length - 1;
-=======
       return columnIndex === this.value.length - 1
->>>>>>> 7627d1d... fixed archive
     }
   }
 }

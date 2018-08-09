@@ -17,11 +17,7 @@
 export default {
   props: {
     canArchive: Boolean,
-<<<<<<< HEAD
     value: Object
-=======
-    value: Array
->>>>>>> 7627d1d... fixed archive
   },
   methods: {
     archive: function() {
