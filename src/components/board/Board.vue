@@ -7,7 +7,7 @@
         <span class="fa fa-plus" style="float: right; cursor: pointer;" @click="add" title="Add Column"></span>
       </p>
       <draggable :list="column.tasks" :options="{ group:'tasks' }" style="min-height: 100px">
-        <Task v-for="(task, index) in column.tasks" :key="task.name" :canArchive="isLastColumn(columnIndex)" v-model="column.tasks[index]"></Task>
+        <Task v-for="(task, index) in column.tasks" v-if="!task.isArchived" :key="task.name" :canArchive="isLastColumn(columnIndex)" v-model="column.tasks[index]"></Task>
       </draggable>
     </div>
   </div>

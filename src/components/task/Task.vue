@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     archive: function() {
-      console.log('Archive Clicked')
+      this.value.isArchived = true;
     },
     remove: function() {
       console.log('Remove Clicked')
