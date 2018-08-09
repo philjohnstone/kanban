@@ -15,10 +15,10 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App',
       columns: [
-                 { name: 'To Do', tasks: [ { name: 'Task 1', details: 'This is the first task' },
-                                           { name: 'Task 4', details: 'This is the fourth task' } ] },
-                 { name: 'Doing', tasks: [ { name: 'Task 2', details: 'This is the second task' } ] },
-                 { name: 'Done', tasks:  [ { name: 'Task 3', details: 'This is the third task' } ] }
+                 { name: 'To Do', tasks: [ { name: 'Task 1', details: 'This is the first task', isArchived: false },
+                                           { name: 'Task 4', details: 'This is the fourth task', isArchived: false } ] },
+                 { name: 'Doing', tasks: [ { name: 'Task 2', details: 'This is the second task', isArchived: false } ] },
+                 { name: 'Done', tasks:  [ { name: 'Task 3', details: 'This is the third task', isArchived: false } ] }
                ]
     }
   }
