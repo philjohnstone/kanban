@@ -1,33 +1,43 @@
 <template>
   <div class="row">
+
+
     <div class="col-sm" v-for="(column, columnIndex) in value" :column="column" :key="column.name">
-      <p class="column-title" style="text-align: center">
-        <span class="fa fa-cog" style="float: left; cursor: pointer;" @click="setup" title="Setup Column"></span>
+      <p class="column-title">
+        <span class="fa fa-cog" style="float: left" @click="setup" title="Setup Column"></span>
         {{ column.name }}
-        <span class="fa fa-plus" style="float: right; cursor: pointer;" @click="add" title="Add Column"></span>
+        <span class="fa fa-plus" style="float: right" @click="add" title="Add Column"></span>
       </p>
       <draggable :list="column.tasks" :options="{ group:'tasks' }" style="min-height: 100px">
         <Task v-for="(task, taskIndex) in column.tasks"
               v-if="!task.isArchived"
+              v-model="column.tasks[taskIndex]"
               :key="task.name"
               :canArchive="isLastColumn(columnIndex)"
-              v-model="column.tasks[taskIndex]"
-              @remove-task="removeTask(columnIndex, taskIndex)"></Task>
+              @remove-task="removeTask(columnIndex, taskIndex)"
+              @archive-task="archiveTask(columnIndex, taskIndex)"
+              @view-task="viewTask(columnIndex, taskIndex)"></Task>
       </draggable>
     </div>
+<!--
+    <TaskDetails></TaskDetails>-->
   </div>
 </template>
 
 <script>
 import draggable from 'vuedraggable'
-import Task from '../task/Task.vue'
+
+import Task from './Task.vue'
+import TaskDetails from './TaskDetails.vue'
+
 export default {
   props: {
     value: Array
   },
   components: {
     draggable,
-    Task
+    Task,
+    TaskDetails
   },
   methods: {
     setup: function() {
@@ -39,8 +49,14 @@ export default {
     isLastColumn: function(columnIndex) {
       return columnIndex === this.value.length - 1
     },
+    archiveTask: function(columnIndex, taskIndex) {
+      this.value[columnIndex].tasks[taskIndex].isArchived = true
+    },
     removeTask: function(columnIndex, taskIndex) {
       this.value[columnIndex].tasks.splice(taskIndex, 1)
+    },
+    viewTask: function(columnIndex, taskIndex) {
+
     }
   }
 }
@@ -56,6 +72,9 @@ export default {
 }
 .col-sm:first-child {
   border-left: 0;
+}
+.column-title {
+  text-align: center
 }
 .column-header {
   text-align: center;
