@@ -1,16 +1,20 @@
 <template>
-  <div class="row">
+  <div class="row" v-if="!archiveVisible">
     <Column v-for="(column, columnIndex) in value"
             :key="column.name"
             :value="column"
             :columnIndex="columnIndex"
-            :isLastColumn="columnIndex === value.length - 1"></Column>
+            :isLastColumn="columnIndex === value.length - 1"
+            :isArchiveVisible="archivedTasks.length > 0"
+            @view-archive="archiveVisible = !archiveVisible"></Column>
   </div>
+  <Archive v-else :value="archivedTasks" @close-archive="archiveVisible = !archiveVisible"></Archive>
 </template>
 
 <script>
 import draggable from 'vuedraggable'
 
+import Archive from './Archive.vue'
 import Column from './Column.vue'
 import Task from './Task.vue'
 import NewTask from './NewTask.vue'
@@ -18,6 +22,11 @@ import NewTask from './NewTask.vue'
 export default {
   props: {
     value: Array
+  },
+  computed: {
+    archivedTasks: function () {
+      return this.value[this.value.length - 1].tasks.filter(task => task.archivedDate != null)
+    }
   },
   created: function () {
     console.log('created')
@@ -27,10 +36,12 @@ export default {
   },
   data() {
     return {
-      addTaskVisible: new Array(this.value.length)
+      addTaskVisible: new Array(this.value.length),
+      archiveVisible: false
     }
   },
   components: {
+    Archive,
     Column,
     Task,
     NewTask

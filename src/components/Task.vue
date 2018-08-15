@@ -13,7 +13,7 @@
             @click="$emit('archive-task')"
             title="Archive Task"></span>
     </div>
-    <div class="card-body" v-if="isEditing">
+    <div class="card-body" v-else>
       <div class="input-group mb-3">
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon3">Name</span>

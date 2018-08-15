@@ -4,11 +4,16 @@
       <span v-if="!editTitle" @click="setup">{{ value.name }}</span>
       <input type="text" v-model="titleName" v-if="editTitle" @keyup.enter="changeTitle"/>
       <span class="fa fa-plus" style="float: right" @click="add" title="Add Task"></span>
+      <span v-if="isLastColumn && isArchiveVisible"
+            class="fa fa-archive"
+            style="float: right; padding-right: 0.5rem"
+            @click="$emit('view-archive')"
+            title="View Archive"></span>
     </p>
     <NewTask :visible="addTaskVisible" @add-task="addTask($event)" @add-cancelled="addTaskVisible = false"></NewTask>
     <draggable :list="value.tasks" :options="{ group:'tasks' }" style="min-height: 100px">
       <Task v-for="(task, taskIndex) in value.tasks"
-            v-if="!task.isArchived"
+            v-if="task.archivedDate == null"
             v-model="value.tasks[taskIndex]"
             :key="task.name"
             :canArchive="isLastColumn"
@@ -28,6 +33,7 @@ export default {
   props: {
     columnIndex: Number,
     isLastColumn: Boolean,
+    isArchiveVisible: false,
     value: Object
   },
   components: {
@@ -61,7 +67,7 @@ export default {
       this.value.tasks.push(task)
     },
     archiveTask: function(taskIndex) {
-      this.value.tasks[taskIndex].isArchived = true
+      this.value.tasks[taskIndex].archivedDate = new Date()
     },
     removeTask: function(taskIndex) {
       this.value.tasks.splice(taskIndex, 1)
