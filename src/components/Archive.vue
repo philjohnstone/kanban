@@ -12,11 +12,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="task in value">
+        <tr v-for="(task, taskIndex) in value">
           <th>{{ task.name }}</th>
           <td>{{ task.details }}</td>
           <td>{{ task.archivedDate }}</td>
-          <td><button type="button "class="btn btn-link" @click="task.archivedDate = null" title="Unarchive Task">Unarchive</button></td>
+          <td><button type="button "class="btn btn-link" @click="$emit('unarchive-task', taskIndex)" title="Unarchive Task">Unarchive</button></td>
         </tr>
       </tbody>
     </table>

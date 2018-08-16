@@ -29,7 +29,7 @@
       </div>
 
       <div style="text-align: right; margin-top: 0.5rem">
-        <button type="button" class="btn btn-primary" @click="updateTask">Update</button>
+        <button type="button" class="btn btn-primary" @click="update">Update</button>
         <button type="button "class="btn btn-link" @click="isEditing = !isEditing">Cancel</button>
       </div>
     </div>
@@ -55,9 +55,8 @@ export default {
       this.taskDetails = this.value.details
       this.isEditing = !this.isEditing
     },
-    updateTask: function () {
-      this.value.name = this.taskName
-      this.value.details = this.taskDetails
+    update: function () {
+      this.$emit('update-task', { taskName: this.taskName, taskDetails: this.taskDetails })
       this.isEditing = !this.isEditing
     }
   }

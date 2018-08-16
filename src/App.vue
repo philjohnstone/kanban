@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="container-fluid" style="height: 100%">
-    <board :value="columns"></board>
+    <board></board>
   </div>
 </template>
 
@@ -10,17 +10,6 @@ export default {
   name: 'app',
   components: {
     Board
-  },
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App',
-      columns: [
-                 { name: 'To Do', tasks: [ { name: 'Task 1', details: 'This is the first task', archivedDate: null },
-                                           { name: 'Task 4', details: 'This is the fourth task', archivedDate: null } ] },
-                 { name: 'Doing', tasks: [ { name: 'Task 2', details: 'This is the second task', archivedDate: null } ] },
-                 { name: 'Done', tasks:  [ { name: 'Task 3', details: 'This is the third task', archivedDate: null } ] }
-               ]
-    }
   }
 }
 </script>

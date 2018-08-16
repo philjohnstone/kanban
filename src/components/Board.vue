@@ -1,14 +1,15 @@
 <template>
   <div class="row" v-if="!archiveVisible">
-    <Column v-for="(column, columnIndex) in value"
+    <Column v-for="(column, columnIndex) in columns"
             :key="column.name"
-            :value="column"
             :columnIndex="columnIndex"
-            :isLastColumn="columnIndex === value.length - 1"
+            :isLastColumn="columnIndex === columns.length - 1"
             :isArchiveVisible="archivedTasks.length > 0"
             @view-archive="archiveVisible = !archiveVisible"></Column>
   </div>
-  <Archive v-else :value="archivedTasks" @close-archive="archiveVisible = !archiveVisible"></Archive>
+  <Archive v-else :value="archivedTasks"
+           @close-archive="archiveVisible = !archiveVisible"
+           @unarchive-task="unarchiveTask($event)"></Archive>
 </template>
 
 <script>
@@ -20,24 +21,28 @@ import Task from './Task.vue'
 import NewTask from './NewTask.vue'
 
 export default {
-  props: {
-    value: Array
-  },
   computed: {
     archivedTasks: function () {
-      return this.value[this.value.length - 1].tasks.filter(task => task.archivedDate != null)
+      return this.$store.state.columns[this.$store.state.columns.length - 1].tasks.filter(task => task.archivedDate != null)
+    },
+    columns: function () {
+      return this.$store.state.columns
     }
   },
   created: function () {
-    console.log('created')
     for (var i = 0; i<this.addTaskVisible.length; i++) {
       this.addTaskVisible[i] = false
     }
   },
   data() {
     return {
-      addTaskVisible: new Array(this.value.length),
+      addTaskVisible: new Array(this.$store.state.columns.length),
       archiveVisible: false
+    }
+  },
+  methods: {
+    unarchiveTask: function (taskIndex) {
+      this.$store.commit('unarchiveTask', taskIndex)
     }
   },
   components: {
