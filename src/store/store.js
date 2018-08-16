@@ -13,14 +13,7 @@ export default new Vuex.Store({
              ]
   },
   mutations: {
-    updateColumns (state, columns) {
-      state.columns = columns
-    },
-    updateColumn (state, { columnIndex, column }) {
-      state.columns[columnIndex] = column
-    },
     updateColumnName (state, { columnIndex, columnName }) {
-      // Column.vue
       state.columns[columnIndex].name = columnName
     },
     updateTask (state, { columnIndex, taskIndex, taskName, taskDetails }) {
@@ -31,15 +24,12 @@ export default new Vuex.Store({
       state.columns[columnIndex].tasks = tasks
     },
     archiveTask (state, { columnIndex, taskIndex }) {
-      // Column.vue
       state.columns[columnIndex].tasks[taskIndex].archivedDate = new Date()
     },
     unarchiveTask (state, taskIndex) {
-      // Board.vue
       state.columns[state.columns.length - 1].tasks[taskIndex].archivedDate = null
     },
     removeTask (state, { columnIndex, taskIndex }) {
-      // Column.vue
       state.columns[columnIndex].tasks.splice(taskIndex, 1)
     },
     addTask (state, { columnIndex, task }) {
