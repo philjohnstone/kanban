@@ -11,6 +11,14 @@ export const store = new Vuex.Store({
                { name: 'Done', tasks:  [] }
              ]
   },
+  getters: {
+    archivedTasks: stat => getters => {
+      return state.columns[getters.numberOfColumns - 1].tasks.filter(task => task.archivedDate != null)
+    },
+    numberOfColumns: state => {
+      return state.columns.length
+    }
+  },
   mutations: {
     initialiseKanban (state) {
       if (localStorage.getItem('kanban')) {

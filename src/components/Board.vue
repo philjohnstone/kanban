@@ -23,7 +23,7 @@ import NewTask from './NewTask.vue'
 export default {
   computed: {
     archivedTasks: function () {
-      return this.$store.state.columns[this.$store.state.columns.length - 1].tasks.filter(task => task.archivedDate != null)
+      return this.$store.getters.archivedTasks
     },
     columns: function () {
       return this.$store.state.columns
@@ -36,7 +36,7 @@ export default {
   },
   data() {
     return {
-      addTaskVisible: new Array(this.$store.state.columns.length),
+      addTaskVisible: new Array(this.$store.getters.numberOfColumns),
       archiveVisible: false
     }
   },
