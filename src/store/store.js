@@ -3,16 +3,20 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+export const store = new Vuex.Store({
   state: {
     columns: [
-               { name: 'To Do', tasks: [ { name: 'Task 1', details: 'This is the first task', archivedDate: null },
-                                         { name: 'Task 4', details: 'This is the fourth task', archivedDate: null } ] },
-               { name: 'Doing', tasks: [ { name: 'Task 2', details: 'This is the second task', archivedDate: null } ] },
-               { name: 'Done', tasks:  [ { name: 'Task 3', details: 'This is the third task', archivedDate: null } ] }
+               { name: 'To Do', tasks: [] },
+               { name: 'Doing', tasks: [] },
+               { name: 'Done', tasks:  [] }
              ]
   },
   mutations: {
+    initialiseKanban (state) {
+      if (localStorage.getItem('kanban')) {
+        this.replaceState(Object.assign(state, JSON.parse(localStorage.getItem('kanban'))))
+      }
+    },
     updateColumnName (state, { columnIndex, columnName }) {
       state.columns[columnIndex].name = columnName
     },
@@ -37,3 +41,9 @@ export default new Vuex.Store({
     }
   }
 });
+
+store.subscribe((mutations, state) => {
+  localStorage.setItem('kanban', JSON.stringify(state))
+});
+
+export default store
