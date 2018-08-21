@@ -1,6 +1,8 @@
-# kanban
+# Kanban
 
-> A Vue.js project
+> A Kanban board written with Vue.js using local storage.
+
+![Kanban screenshot](/screenshot.png)
 
 ## Build Setup
 
