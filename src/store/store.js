@@ -12,7 +12,7 @@ export const store = new Vuex.Store({
              ]
   },
   getters: {
-    archivedTasks: stat => getters => {
+    archivedTasks: (state, getters) => {
       return state.columns[getters.numberOfColumns - 1].tasks.filter(task => task.archivedDate != null)
     },
     numberOfColumns: state => {
